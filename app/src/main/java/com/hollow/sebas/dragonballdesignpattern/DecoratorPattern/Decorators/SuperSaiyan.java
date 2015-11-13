@@ -16,14 +16,8 @@ public class SuperSaiyan extends Decorator {
     }
 
     @Override
-    public String getName() {
-        return MessageFormat.format("SSJ {0}", hero.getName());
-    }
-
-    @Override
-    public int getPowerLevel() {
-        int pow = hero.getPowerLevel();
-        return pow * pow;
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath, 4);
     }
 
     @Override
@@ -32,13 +26,19 @@ public class SuperSaiyan extends Decorator {
     }
 
     @Override
-    public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo(spriteRootPath, 4);
+    public Sprite.SpriteInfo getAttackSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 13);
     }
 
     @Override
-    public Sprite.SpriteInfo getAttackSpriteInfo(){
-        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 13);
+    public String getName() {
+        return MessageFormat.format("SSJ {0}", hero.getName());
+    }
+
+    @Override
+    public int getPowerLevel() {
+        int pow = hero.getPowerLevel();
+        return pow * pow;
     }
 
     @Override

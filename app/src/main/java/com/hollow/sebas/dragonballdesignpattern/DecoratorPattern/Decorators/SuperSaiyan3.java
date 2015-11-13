@@ -18,10 +18,19 @@ public class SuperSaiyan3 extends Decorator {
         addPermanentPower(this.hero);
     }
 
-    public void addPermanentPower (Hero hero){
-        if (hero instanceof Goku)
-            ((Goku) hero).maxHealth += permanentHpIncrement;
-        else ((Decorator) hero).getChild();
+    @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath, 3);
+    }
+
+    @Override
+    public Sprite.SpriteInfo getTransformationSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath + "Transformation/", 12);
+    }
+
+    @Override
+    public Sprite.SpriteInfo getAttackSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 9);
     }
 
     @Override
@@ -45,18 +54,9 @@ public class SuperSaiyan3 extends Decorator {
         return null;
     }
 
-    @Override
-    public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo("Goku/SSJ3/", 3);
-    }
-
-    @Override
-    public Sprite.SpriteInfo getAttackSpriteInfo(){
-        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 9);
-    }
-
-    @Override
-    public Sprite.SpriteInfo getTransformationSpriteInfo(){
-        return new Sprite.SpriteInfo(spriteRootPath + "Transformation/", 12);
+    public void addPermanentPower (Hero hero){
+        if (hero instanceof Goku)
+            ((Goku) hero).maxHealth += permanentHpIncrement;
+        else ((Decorator) hero).getChild();
     }
 }

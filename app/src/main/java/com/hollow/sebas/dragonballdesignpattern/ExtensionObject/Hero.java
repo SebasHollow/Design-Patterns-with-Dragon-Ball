@@ -9,6 +9,8 @@ import java.util.Map;
  */
 public abstract class Hero implements Extendable {
     public abstract Sprite.SpriteInfo getBaseSpriteInfo();
+    public abstract Sprite.SpriteInfo getTransformationSpriteInfo();
+    public abstract Sprite.SpriteInfo getAttackSpriteInfo();
     public abstract String getName();
     public abstract int getPowerLevel();
     public abstract int getMaxHealth();

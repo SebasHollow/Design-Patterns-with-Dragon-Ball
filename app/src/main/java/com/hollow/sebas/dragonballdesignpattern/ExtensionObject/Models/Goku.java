@@ -10,28 +10,25 @@ import java.util.Map;
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
 public class Goku extends Hero {
+    private String spriteRootPath = "Goku/Base/";
     String name = "Goku";
-    String race = "Android";
     int powerLevel = 1;
     int maxHealth = 100;
     HashMap<String, Integer> techniques = new HashMap<>();
 
-    public Goku(){
-        techniques.put("Punch", 3);
-        techniques.put("Kick", 5);
-        techniques.put("Ki Blast", 10);
-    }
-
-    Goku(String name, String race, int powerLevel, int maxHealth){
-        this.name = name;
-        this.race = race;
-        this.powerLevel = powerLevel;
-        this.maxHealth = maxHealth;
+    @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath, 4);
     }
 
     @Override
-    public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo("Goku/Base/", 4);
+    public Sprite.SpriteInfo getTransformationSpriteInfo() {
+        return null;
+    }
+
+    @Override
+    public Sprite.SpriteInfo getAttackSpriteInfo() {
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 13);
     }
 
     @Override

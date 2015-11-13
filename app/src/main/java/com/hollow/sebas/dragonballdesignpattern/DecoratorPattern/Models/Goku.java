@@ -10,6 +10,7 @@ import java.util.Map;
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
 public class Goku implements Hero {
+    private String spriteRootPath = "Goku/Base/";
     String name = "Goku";
     String race = "Saiyan";
     public int powerLevel = 1;
@@ -30,18 +31,18 @@ public class Goku implements Hero {
     }
 
     @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath, 4);
+    }
+
+    @Override
     public Sprite.SpriteInfo getTransformationSpriteInfo() {
         return null;
     }
 
     @Override
-    public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo("Goku/Base/", 4);
-    }
-
-    @Override
     public Sprite.SpriteInfo getAttackSpriteInfo() {
-        return new Sprite.SpriteInfo("Goku/Base/Attack/", 13);
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 13);
     }
 
     @Override
