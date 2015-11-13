@@ -10,15 +10,11 @@ import java.util.Map;
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
 public class SuperSaiyan extends Decorator {
+    private String spriteRootPath = "Goku/SSJ/";
     public SuperSaiyan(Hero hero){
         this.hero = hero;
     }
 
-    /*public static Hero Extend(Hero hero){
-        boolean isSaiyan = hero.getRace().equals("Saiyan");
-        return isSaiyan ? new SuperSaiyan(hero) : hero;
-    }
-    */
     @Override
     public String getName() {
         return MessageFormat.format("SSJ {0}", hero.getName());
@@ -31,8 +27,18 @@ public class SuperSaiyan extends Decorator {
     }
 
     @Override
+    public Sprite.SpriteInfo getTransformationSpriteInfo() {
+        return new Sprite.SpriteInfo(spriteRootPath + "Transformation/XT/", 8);
+    }
+
+    @Override
     public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo("Goku/SSJ/", 4);
+        return new Sprite.SpriteInfo(spriteRootPath, 4);
+    }
+
+    @Override
+    public Sprite.SpriteInfo getAttackSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 13);
     }
 
     @Override

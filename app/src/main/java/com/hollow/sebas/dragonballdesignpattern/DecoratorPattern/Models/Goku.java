@@ -30,8 +30,18 @@ public class Goku implements Hero {
     }
 
     @Override
+    public Sprite.SpriteInfo getTransformationSpriteInfo() {
+        return null;
+    }
+
+    @Override
     public Sprite.SpriteInfo getBaseSpriteInfo(){
         return new Sprite.SpriteInfo("Goku/Base/", 4);
+    }
+
+    @Override
+    public Sprite.SpriteInfo getAttackSpriteInfo() {
+        return new Sprite.SpriteInfo("Goku/Base/Attack/", 13);
     }
 
     @Override

@@ -10,13 +10,24 @@ import java.util.Map;
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
 public class KaioKen extends Decorator {
+    private String spriteRootPath = "Goku/Kaioken/";
     public KaioKen(Hero hero){
         this.hero = hero;
     }
 
     @Override
     public Sprite.SpriteInfo getBaseSpriteInfo(){
-        return new Sprite.SpriteInfo("Goku/Kaioken/", 2);
+        return new Sprite.SpriteInfo(spriteRootPath, 2);
+    }
+
+    @Override
+    public Sprite.SpriteInfo getTransformationSpriteInfo() {
+        return hero.getTransformationSpriteInfo();
+    }
+
+    @Override
+    public Sprite.SpriteInfo getAttackSpriteInfo(){
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 27);
     }
 
     @Override
@@ -39,4 +50,5 @@ public class KaioKen extends Decorator {
     public Map<String, Integer> getAttacks() {
         return hero.getAttacks();
     }
+
 }

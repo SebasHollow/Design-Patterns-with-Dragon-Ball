@@ -104,6 +104,9 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
                     index = 0;
             }
             sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+            Sprite.SpriteInfo transfAnim = hero.getTransformationSpriteInfo();
+            if (transfAnim != null && index < 4)
+                sprite.pushAnimation(transfAnim);
         }
 		return true;
 	}
