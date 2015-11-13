@@ -21,7 +21,7 @@ public class Sprite {
     private int currentFrame = 0;
     private long frameTicker;
     private int framePeriod;
-    //private int kameLoop = 8;
+    private SpriteInfo animationInfo = null;
 
     @SuppressWarnings("FieldCanBeLocal")
     private int x = 400;
@@ -29,13 +29,12 @@ public class Sprite {
     private int y = 850;
 
     private String format;
-    //private int kameTick = 0;
 
 
     public Sprite(Activity activity, SpriteInfo info) {
         this.activity = activity;
         updateBaseSpriteInfo(info);
-        bitmap = getBitmap(MessageFormat.format(format , 0));
+        bitmap = getBitmap(MessageFormat.format(format, 0));
     }
 
     public int getX() {
@@ -46,24 +45,46 @@ public class Sprite {
     }
 
     public void updateBaseSpriteInfo(SpriteInfo info){
-        format = info.path + "{0}.png";
+        format = info.path;
         fps = info.fps;
         frameTicker = 0l;
         framePeriod = 1000 / fps;
+        currentFrame = 0;
+    }
+
+    public void pushAnimation(SpriteInfo info){
+        animationInfo = info;
+        currentFrame = 0;
+    }
+
+    public void cancelAnimations(){
+        animationInfo = null;
+        currentFrame = 0;
     }
 
     public void update(long gameTime) {
-        if (gameTime <= frameTicker + framePeriod)
-            return;
-        frameTicker = gameTime;
+        boolean isBaseAnimation = animationInfo == null;
+        long updateTime = frameTicker + (isBaseAnimation ? framePeriod : 1000 / animationInfo.fps);
 
-/*        if (++currentFrame > kameLoop && ++kameTick < 25){
-            currentFrame = 7;
+        if (gameTime <= updateTime)
+            return;
+
+        frameTicker = gameTime;
+        currentFrame++;
+
+        if (isBaseAnimation) {
+            //Constant loop between 0..fps values
+            currentFrame %= fps;
+            bitmap = getBitmap(MessageFormat.format(format, currentFrame));
         }
-        else */
-        if (++currentFrame >= fps - 1) {
-            currentFrame = 0;
-            //kameTick = 0;
+        else animationUpdate();
+    }
+
+    void animationUpdate (){
+        String format = animationInfo.path;
+        if (currentFrame >= animationInfo.fps - 1){
+            animationInfo = null;
+            frameTicker = 0l;
         }
         bitmap = getBitmap(MessageFormat.format(format, currentFrame));
     }
@@ -103,7 +124,7 @@ public class Sprite {
         int fps;
 
         public SpriteInfo(String path, int fps){
-            this.path = path;
+            this.path = path + "{0}.png";
             this.fps = fps;
         }
     }

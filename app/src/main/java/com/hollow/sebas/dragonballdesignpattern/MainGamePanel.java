@@ -80,6 +80,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
             switch (++index){
                 case 1:
+                    sprite.cancelAnimations();
                     hero = new KaioKen(hero);
                     break;
                 case 2:
@@ -96,11 +97,11 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
                     break;
                 case 6:
                     hero = ((Decorator)hero).removeRole(SuperSaiyan.class);
-                    index = 0;
                     break;
+                case 7:
+                    sprite.pushAnimation(new Sprite.SpriteInfo("Goku/Kaioken/Attack/", 27));
                 default:
                     index = 0;
-                    hero = new Goku();
             }
             sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
         }
