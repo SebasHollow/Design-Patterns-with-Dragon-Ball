@@ -8,7 +8,6 @@ import java.util.Map;
 public interface Hero {
     String spritePath();
     String getName();
-    String getRace();
     int getPowerLevel();
     int getMaxHealth();
     Map<String, Integer> getAttacks();

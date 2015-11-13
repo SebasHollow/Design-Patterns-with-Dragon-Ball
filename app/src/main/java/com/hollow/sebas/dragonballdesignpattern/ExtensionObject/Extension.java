@@ -7,7 +7,6 @@ import java.util.Map;
  */
 public interface Extension {
     String getName();
-    String getRace();
     int getPowerLevel();
     int getMaxHealth();
     Map<String, Integer> getAttacks();

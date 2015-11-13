@@ -18,10 +18,6 @@ public class SuperSaiyan3 extends Decorator {
         return MessageFormat.format("SSJ2 {0}", hero.getName());
     }
 
-    @Override
-    public String getRace() {
-        return hero.getRace();
-    }
 
     @Override
     public int getPowerLevel() {

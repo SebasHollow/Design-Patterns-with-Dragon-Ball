@@ -17,10 +17,10 @@ public class Sprite {
     private final Activity activity;
     private Bitmap bitmap;
     //private ArrayList<Bitmap> extraBitmaps = new ArrayList<>(); // the animation sequence
-    private int fps;		// number of frames in animation
+    private int fps;
     private int currentFrame = 0;
-    private long frameTicker;	// the time of the last frame update
-    private int framePeriod;	// milliseconds between each frame (1000/fps)
+    private long frameTicker;
+    private int framePeriod;
     //private int kameLoop = 8;
 
     @SuppressWarnings("FieldCanBeLocal")

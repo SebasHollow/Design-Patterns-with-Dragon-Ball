@@ -7,25 +7,24 @@ import java.util.Map;
 /**
  * Created by Sebastian Hollow on 9/11/2015 Dragon Ball Design Pattern.
  */
-public class VegitaDNA implements Extension {
+public class SSJGoku implements Extension {
     @Override
     public String getName() {
-        return "";
-    }
-
-    @Override
-    public String getRace() {
-        return "";
+        return "SSJ";
     }
 
     @Override
     public int getPowerLevel() {
-        return 50;
+        return 100;
+    }
+
+    public String spritePath(){
+        return "Goku/SSJ/";
     }
 
     @Override
     public int getMaxHealth() {
-        return 50;
+        return 100;
     }
 
     @Override

@@ -7,7 +7,6 @@ import java.util.Map;
  */
 public abstract class Hero implements Extendable {
     public abstract String getName();
-    public abstract String getRace();
     public abstract int getPowerLevel();
     public abstract int getMaxHealth();
     public abstract Map<String, Integer> getAttacks();

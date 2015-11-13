@@ -24,11 +24,6 @@ public class KaioKen extends Decorator {
     }
 
     @Override
-    public String getRace() {
-        return hero.getRace();
-    }
-
-    @Override
     public int getPowerLevel() {
         int pow = hero.getPowerLevel();
         return pow * pow;

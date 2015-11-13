@@ -39,11 +39,6 @@ public class Goku implements Hero {
     }
 
     @Override
-    public String getRace() {
-        return race;
-    }
-
-    @Override
     public int getPowerLevel() {
         return powerLevel;
     }
