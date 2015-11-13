@@ -12,8 +12,8 @@ import java.util.Map;
 public class Goku implements Hero {
     String name = "Goku";
     String race = "Saiyan";
-    int powerLevel = 1;
-    int maxHealth = 100;
+    public int powerLevel = 1;
+    public int maxHealth = 100;
     Map<String, Integer> techniques = new HashMap<>();
 
     public Goku(){

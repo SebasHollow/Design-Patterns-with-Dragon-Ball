@@ -33,7 +33,7 @@ public abstract class Decorator implements Hero {
         return ((Decorator) hero).removeRole(name);
     }
 
-    private Hero getChild(){
+    protected Hero getChild(){
         return hero;
     }
 }

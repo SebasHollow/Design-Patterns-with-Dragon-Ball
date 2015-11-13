@@ -1,11 +1,10 @@
 package com.hollow.sebas.dragonballdesignpattern;
 
-import android.content.Context;
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -21,28 +20,26 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	private static final String TAG = MainGamePanel.class.getSimpleName();
 	
 	private SpriteThread thread;
-	private Sprite sprite;
 	private Hero hero = new Goku();
-    private int index = 0;
+    private Sprite sprite;
 
-	// the fps to be displayed
+    // the fps to be displayed
 	private String avgFps;
 	public void setAvgFps(String avgFps) {
 		this.avgFps = avgFps;
 	}
 
-	public MainGamePanel(Context context, Sprite sprite) {
-		super(context);
+	public MainGamePanel(Activity activity) {
+		super(activity.getBaseContext());
+        sprite = new Sprite(activity, hero.getBaseSpriteInfo());
 
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
-		// create the game loop thread
 		thread = new SpriteThread(getHolder(), this);
 
 		// make the GamePanel focusable so it can handle events
 		setFocusable(true);
-        this.sprite = sprite;
 	}
 
 	@Override
@@ -74,42 +71,58 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 		}
 		Log.d(TAG, "Thread was shut down cleanly");
 	}
-	
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            switch (++index){
-                case 1:
+
+    public void performAction (int i){
+        boolean decoratorWasRemoved = false;
+        switch (i){
+            case 1:
+                decoratorWasRemoved = removeDecorator(KaioKen.class);
+                if (!decoratorWasRemoved){
                     sprite.cancelAnimations();
                     hero = new KaioKen(hero);
-                    break;
-                case 2:
+                }
+                break;
+            case 2:
+                decoratorWasRemoved = removeDecorator(SuperSaiyan.class);
+                if (!decoratorWasRemoved){
+                    sprite.cancelAnimations();
                     hero = new SuperSaiyan(hero);
-                    break;
-                case 3:
+                }
+                break;
+            case 3:
+                decoratorWasRemoved = removeDecorator(SuperSaiyan3.class);
+                if (!decoratorWasRemoved){
+                    sprite.cancelAnimations();
                     hero = new SuperSaiyan3(hero);
-                    break;
-                case 4:
-                    hero = ((Decorator)hero).removeRole(KaioKen.class);
-                    break;
-                case 5:
-                    hero = ((Decorator)hero).removeRole(SuperSaiyan3.class);
-                    break;
-                case 6:
-                    hero = ((Decorator)hero).removeRole(SuperSaiyan.class);
-                    break;
-                case 7:
-                    sprite.pushAnimation(new Sprite.SpriteInfo("Goku/Kaioken/Attack/", 27));
-                default:
-                    index = 0;
-            }
-            sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+                }
+                break;
+            case 4:
+                sprite.pushAnimation(hero.getAttackSpriteInfo());
+                return;
+            case 0:
+                hero = new Goku();
+        }
+        sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+
+        if (!decoratorWasRemoved && i > 0 && i < 4){
             Sprite.SpriteInfo transfAnim = hero.getTransformationSpriteInfo();
-            if (transfAnim != null && index < 4)
+            if (transfAnim != null)
                 sprite.pushAnimation(transfAnim);
         }
-		return true;
-	}
+
+    }
+
+    private boolean removeDecorator(Class cls){
+        Hero tempHero;
+        if (hero instanceof Decorator) {
+            tempHero = ((Decorator) hero).removeRole(cls);
+            if (tempHero != null){
+                hero = tempHero;
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public void render(Canvas canvas) {
 		canvas.drawARGB(0, 127, 0, 0);
@@ -117,9 +130,19 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 		sprite.draw(canvas);
 		// display fps
 		displayFps(canvas, avgFps);
+        displayStats(canvas);
 	}
 
-	/**
+    private void displayStats(Canvas canvas) {
+        if (canvas != null && hero != null){
+            Paint paint = new Paint();
+            paint.setColor(Color.GREEN);
+            paint.setTextSize(16);
+            canvas.drawText("Max HP : " + hero.getMaxHealth(), 100, 300, paint);
+        }
+    }
+
+    /**
 	 * This is the game update method. It iterates through all the objects
 	 * and calls their update method if they have one or calls specific
 	 * engine's update method.

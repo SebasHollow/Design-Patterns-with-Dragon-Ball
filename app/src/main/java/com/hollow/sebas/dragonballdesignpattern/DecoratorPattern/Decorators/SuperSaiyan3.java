@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators;
 
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Models.Goku;
 import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.text.MessageFormat;
@@ -11,8 +12,16 @@ import java.util.Map;
  */
 public class SuperSaiyan3 extends Decorator {
     private String spriteRootPath = "Goku/SSJ3/";
+    private int permanentHpIncrement = 1000;
     public SuperSaiyan3(Hero hero){
         this.hero = hero;
+        addPermanentPower(this.hero);
+    }
+
+    public void addPermanentPower (Hero hero){
+        if (hero instanceof Goku)
+            ((Goku) hero).maxHealth += permanentHpIncrement;
+        else ((Decorator) hero).getChild();
     }
 
     @Override
@@ -23,7 +32,7 @@ public class SuperSaiyan3 extends Decorator {
     @Override
     public int getPowerLevel() {
         int pow = hero.getPowerLevel();
-        return pow * pow;
+        return pow * pow * pow;
     }
 
     @Override
