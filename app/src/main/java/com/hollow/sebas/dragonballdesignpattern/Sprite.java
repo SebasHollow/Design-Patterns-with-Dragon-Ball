@@ -17,7 +17,7 @@ public class Sprite {
     private final Activity activity;
     private Bitmap bitmap;
     //private ArrayList<Bitmap> extraBitmaps = new ArrayList<>(); // the animation sequence
-    private int fps;
+    private int framesCount;
     private int currentFrame = 0;
     private long frameTicker;
     private int framePeriod;
@@ -46,9 +46,9 @@ public class Sprite {
 
     public void updateBaseSpriteInfo(SpriteInfo info){
         format = info.path;
-        fps = info.fps;
+        framesCount = info.fps;
         frameTicker = 0l;
-        framePeriod = 1000 / fps;
+        framePeriod = 1000 / info.frameCount;
         currentFrame = 0;
     }
 
@@ -64,7 +64,7 @@ public class Sprite {
 
     public void update(long gameTime) {
         boolean isBaseAnimation = animationInfo == null;
-        long updateTime = frameTicker + (isBaseAnimation ? framePeriod : 1000 / animationInfo.fps);
+        long updateTime = frameTicker + (isBaseAnimation ? framePeriod : 1000 / animationInfo.frameCount);
 
         if (gameTime <= updateTime)
             return;
@@ -73,8 +73,8 @@ public class Sprite {
         currentFrame++;
 
         if (isBaseAnimation) {
-            //Constant loop between 0..fps values
-            currentFrame %= fps;
+            //Constant loop between 0..framesCount values
+            currentFrame %= framesCount;
             bitmap = getBitmap(MessageFormat.format(format, currentFrame));
         }
         else animationUpdate();
@@ -122,10 +122,17 @@ public class Sprite {
     public static class SpriteInfo{
         String path;
         int fps;
+        int frameCount;
 
         public SpriteInfo(String path, int fps){
+            this(path, fps, fps);
+        }
+
+        public SpriteInfo(String path, int fps, int frameCount){
             this.path = path + "{0}.png";
             this.fps = fps;
+            this.frameCount = frameCount;
         }
+
     }
 }

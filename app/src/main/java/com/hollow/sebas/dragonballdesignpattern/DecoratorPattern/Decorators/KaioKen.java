@@ -27,7 +27,7 @@ public class KaioKen extends Decorator {
 
     @Override
     public Sprite.SpriteInfo getAttackSpriteInfo(){
-        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 27);
+        return new Sprite.SpriteInfo(spriteRootPath + "Attack/", 27, 13);
     }
 
     @Override
