@@ -29,6 +29,11 @@ public class Goku implements Hero {
     }
 
     @Override
+    public String spritePath(){
+        return "Goku/Base/";
+    }
+
+    @Override
     public String getName() {
         return name;
     }

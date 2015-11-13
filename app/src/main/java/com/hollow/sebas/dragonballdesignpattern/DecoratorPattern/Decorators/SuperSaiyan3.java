@@ -8,8 +8,8 @@ import java.util.Map;
 /**
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
-public class SuperSaiyan2 extends Decorator {
-    public SuperSaiyan2(Hero hero){
+public class SuperSaiyan3 extends Decorator {
+    public SuperSaiyan3(Hero hero){
         this.hero = hero;
     }
 
@@ -37,5 +37,9 @@ public class SuperSaiyan2 extends Decorator {
     @Override
     public Map<String, Integer> getAttacks() {
         return null;
+    }
+
+    public String spritePath(){
+        return "Goku/SSJ3/";
     }
 }

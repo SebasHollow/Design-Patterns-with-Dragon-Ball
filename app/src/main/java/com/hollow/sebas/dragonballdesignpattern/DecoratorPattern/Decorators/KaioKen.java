@@ -9,8 +9,13 @@ import java.util.Map;
  * Created by Sebastian Hollow on 7/11/2015 Dragon Ball Design Pattern.
  */
 public class KaioKen extends Decorator {
-    private KaioKen(Hero hero){
+    public KaioKen(Hero hero){
         this.hero = hero;
+    }
+
+    @Override
+    public String spritePath() {
+        return "Goku/Kaioken/";
     }
 
     @Override

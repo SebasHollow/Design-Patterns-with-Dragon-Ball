@@ -9,12 +9,21 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.Decorator;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.KaioKen;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan3;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Models.Goku;
+
 public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 	private static final String TAG = MainGamePanel.class.getSimpleName();
 	
 	private SpriteThread thread;
 	private Sprite sprite;
+	private Hero hero = new Goku();
+    private int index = 0;
 
 	// the fps to be displayed
 	private String avgFps;
@@ -69,7 +78,29 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			// handle touch
+            switch (++index){
+                case 1:
+                    hero = new KaioKen(hero);
+                    break;
+                case 2:
+                    hero = new SuperSaiyan(hero);
+                    break;
+                case 3:
+                    hero = new SuperSaiyan3(hero);
+                    break;
+                case 4:
+                    hero = ((Decorator)hero).removeRole(KaioKen.class);
+                    break;
+                case 5:
+                    hero = ((Decorator)hero).removeRole(SuperSaiyan3.class);
+                    break;
+                case 6:
+                    hero = ((Decorator)hero).removeRole(SuperSaiyan.class);
+                    break;
+                default:
+                    index = 0;
+                    hero = new Goku();
+            }
 		}
 		return true;
 	}
@@ -88,6 +119,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	 * engine's update method.
 	 */
 	public void update() {
+        sprite.updatePath(hero.spritePath());
 		sprite.update(System.currentTimeMillis());
 	}
 

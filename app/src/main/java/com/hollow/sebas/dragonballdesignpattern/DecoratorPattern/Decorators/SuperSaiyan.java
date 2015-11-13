@@ -34,6 +34,10 @@ public class SuperSaiyan extends Decorator {
         return pow * pow;
     }
 
+    public String spritePath(){
+        return "Goku/SSJ/";
+    }
+
     @Override
     public int getMaxHealth() {
         return hero.getMaxHealth();

@@ -5,7 +5,7 @@ import android.test.ApplicationTestCase;
 
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.Decorator;
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan;
-import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan2;
+import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan3;
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Models.Goku;
 
@@ -30,7 +30,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public static void negativeTest(Hero h){
-        Decorator ssjHero = new SuperSaiyan2(h);
+        Decorator ssjHero = new SuperSaiyan3(h);
         Decorator newObj = ssjHero.getRole(SuperSaiyan.class);
         Assert.assertTrue(newObj == null);
     }
