@@ -25,6 +25,10 @@ public abstract class Hero implements Extendable {
             m_extensions.remove(key);
     }
 
+    public void removeAll(){
+        m_extensions.clear();
+    }
+
     public Extension getExtension(String key) {
         if (m_extensions.containsKey(key))
             return m_extensions.get(key);

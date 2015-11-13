@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
     MainGamePanel gameView;
+    public static boolean isDecorator = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,9 @@ public class MainActivity extends Activity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gameView.performAction(finalI);
+                    if (isDecorator)
+                        gameView.performAction(finalI);
+                    else gameView.performAction2(finalI);
                 }
             });
         }

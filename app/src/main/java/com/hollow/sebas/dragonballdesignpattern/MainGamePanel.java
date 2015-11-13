@@ -14,6 +14,11 @@ import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.Supe
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators.SuperSaiyan3;
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Models.Goku;
+import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extension;
+import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extensions.Kaioken;
+import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extensions.SSJGoku;
+import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extensions.SSJGoku3;
+import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Models.CyborgGoku;
 
 public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -21,6 +26,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	
 	private SpriteThread thread;
 	private Hero hero = new Goku();
+    private CyborgGoku cGoku = new CyborgGoku();
     private Sprite sprite;
 
     // the fps to be displayed
@@ -43,7 +49,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	}
 
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+	public void surfaceChanged(SurfaceHolder    holder, int format, int width,
 			int height) {
 	}
 
@@ -99,8 +105,14 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
             case 4:
                 sprite.pushAnimation(hero.getAttackSpriteInfo());
                 return;
+            case 5:
+                sprite.updateBaseSpriteInfo(cGoku.getBaseSpriteInfo());
+                MainActivity.isDecorator = !MainActivity.isDecorator;
+                return;
             case 0:
                 hero = new Goku();
+                sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+                return;
         }
         sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
 
@@ -124,6 +136,45 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
         return false;
     }
 
+    public void performAction2 (int i){
+        switch (i){
+            case 1:
+                toggleExtension("KaioKen", new Kaioken());
+                break;
+            case 2:
+                toggleExtension("SSJGoku", new SSJGoku());
+                break;
+            case 3:
+                toggleExtension("SSJGoku3", new SSJGoku3());
+                break;
+            case 4:
+                Sprite.SpriteInfo rly = cGoku.getAttackSpriteInfo();
+                sprite.pushAnimation(rly);
+                return;
+            case 5:
+                sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+                MainActivity.isDecorator = !MainActivity.isDecorator;
+                return;
+            case 0:
+                cGoku.removeAll();
+                sprite.updateBaseSpriteInfo(cGoku.getBaseSpriteInfo());
+        }
+    }
+
+    //return true if hero got "powered up"
+    public void toggleExtension(String key, Extension e){
+        if (cGoku.getExtension(key) != null){
+            cGoku.removeExtension(key);
+            sprite.updateBaseSpriteInfo(cGoku.getBaseSpriteInfo());
+        } else {
+            cGoku.addExtension(key, e);
+            sprite.updateBaseSpriteInfo(cGoku.getBaseSpriteInfo());
+            Sprite.SpriteInfo transformAnim = cGoku.getTransformationSpriteInfo();
+            if (transformAnim != null)
+                sprite.pushAnimation(transformAnim);
+        }
+    }
+
 	public void render(Canvas canvas) {
 		canvas.drawARGB(0, 127, 0, 0);
 		canvas.drawColor(Color.BLACK);
@@ -134,11 +185,17 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	}
 
     private void displayStats(Canvas canvas) {
-        if (canvas != null && hero != null){
+        if (canvas != null){
             Paint paint = new Paint();
-            paint.setColor(Color.GREEN);
             paint.setTextSize(16);
-            canvas.drawText("Max HP : " + hero.getMaxHealth(), 100, 300, paint);
+            if (MainActivity.isDecorator) {
+                paint.setColor(Color.GREEN);
+                canvas.drawText("Max HP : " + hero.getMaxHealth(), 100, 300, paint);
+            }
+            else {
+                paint.setColor(Color.RED);
+                canvas.drawText("Max HP : " + cGoku.getMaxHealth(), 100, 300, paint);
+            }
         }
     }
 
