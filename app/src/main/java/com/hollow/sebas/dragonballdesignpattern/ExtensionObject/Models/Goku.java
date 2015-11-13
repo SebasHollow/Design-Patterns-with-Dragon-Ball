@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Models;
 
 import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Hero;
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,11 @@ public class Goku extends Hero {
         this.race = race;
         this.powerLevel = powerLevel;
         this.maxHealth = maxHealth;
+    }
+
+    @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo("Goku/Base/", 4);
     }
 
     @Override

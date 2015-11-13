@@ -96,12 +96,14 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
                     break;
                 case 6:
                     hero = ((Decorator)hero).removeRole(SuperSaiyan.class);
+                    index = 0;
                     break;
                 default:
                     index = 0;
                     hero = new Goku();
             }
-		}
+            sprite.updateBaseSpriteInfo(hero.getBaseSpriteInfo());
+        }
 		return true;
 	}
 
@@ -119,7 +121,6 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 	 * engine's update method.
 	 */
 	public void update() {
-        sprite.updatePath(hero.spritePath());
 		sprite.update(System.currentTimeMillis());
 	}
 

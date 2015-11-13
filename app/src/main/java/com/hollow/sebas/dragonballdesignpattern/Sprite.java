@@ -32,13 +32,10 @@ public class Sprite {
     //private int kameTick = 0;
 
 
-    public Sprite(Activity activity, String path, int fps) {
+    public Sprite(Activity activity, SpriteInfo info) {
         this.activity = activity;
-        this.fps = fps;
-        updatePath(path);
+        updateBaseSpriteInfo(info);
         bitmap = getBitmap(MessageFormat.format(format , 0));
-        framePeriod = 1000 / this.fps;
-        frameTicker = 0l;
     }
 
     public int getX() {
@@ -48,8 +45,11 @@ public class Sprite {
         return y;
     }
 
-    public void updatePath(String path){
-        format = path + "{0}.png";
+    public void updateBaseSpriteInfo(SpriteInfo info){
+        format = info.path + "{0}.png";
+        fps = info.fps;
+        frameTicker = 0l;
+        framePeriod = 1000 / fps;
     }
 
     public void update(long gameTime) {
@@ -95,5 +95,16 @@ public class Sprite {
             Log.e(TAG, e.toString());
         }
         return null;
+    }
+
+
+    public static class SpriteInfo{
+        String path;
+        int fps;
+
+        public SpriteInfo(String path, int fps){
+            this.path = path;
+            this.fps = fps;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators;
 
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -29,8 +30,9 @@ public class SuperSaiyan extends Decorator {
         return pow * pow;
     }
 
-    public String spritePath(){
-        return "Goku/SSJ/";
+    @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo("Goku/SSJ/", 4);
     }
 
     @Override

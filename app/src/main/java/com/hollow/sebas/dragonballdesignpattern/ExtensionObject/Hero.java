@@ -1,11 +1,14 @@
 package com.hollow.sebas.dragonballdesignpattern.ExtensionObject;
 
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
+
 import java.util.Map;
 
 /**
  * Created by Sebastian Hollow on 9/11/2015 Dragon Ball Design Pattern.
  */
 public abstract class Hero implements Extendable {
+    public abstract Sprite.SpriteInfo getBaseSpriteInfo();
     public abstract String getName();
     public abstract int getPowerLevel();
     public abstract int getMaxHealth();

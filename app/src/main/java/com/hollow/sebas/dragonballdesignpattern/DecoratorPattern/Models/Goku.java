@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Models;
 
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +30,8 @@ public class Goku implements Hero {
     }
 
     @Override
-    public String spritePath(){
-        return "Goku/Base/";
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo("Goku/Base/", 4);
     }
 
     @Override

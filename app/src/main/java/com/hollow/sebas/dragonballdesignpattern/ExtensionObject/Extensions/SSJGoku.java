@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extensions;
 
 import com.hollow.sebas.dragonballdesignpattern.ExtensionObject.Extension;
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.util.Map;
 
@@ -11,6 +12,11 @@ public class SSJGoku implements Extension {
     @Override
     public String getName() {
         return "SSJ";
+    }
+
+    @Override
+    public Sprite.SpriteInfo getBaseSpriteInfo() {
+        return new Sprite.SpriteInfo("Goku/SSJ/", 4);
     }
 
     @Override

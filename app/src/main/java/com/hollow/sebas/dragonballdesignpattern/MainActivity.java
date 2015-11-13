@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
         Hero goku = new Goku();
         goku = new SuperSaiyan3(goku);
-        Sprite sprite = new Sprite(this, goku.spritePath(),  4);
+        Sprite sprite = new Sprite(this, goku.getBaseSpriteInfo());
         setContentView(new MainGamePanel(this, sprite));
 
         //setContentView(R.layout.activity_main);

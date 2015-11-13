@@ -1,5 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.ExtensionObject;
 
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
+
 import java.util.Map;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Map;
  */
 public interface Extension {
     String getName();
+    Sprite.SpriteInfo getBaseSpriteInfo();
     int getPowerLevel();
     int getMaxHealth();
     Map<String, Integer> getAttacks();

@@ -1,6 +1,7 @@
 package com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Decorators;
 
 import com.hollow.sebas.dragonballdesignpattern.DecoratorPattern.Hero;
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -14,8 +15,8 @@ public class KaioKen extends Decorator {
     }
 
     @Override
-    public String spritePath() {
-        return "Goku/Kaioken/";
+    public Sprite.SpriteInfo getBaseSpriteInfo(){
+        return new Sprite.SpriteInfo("Goku/Kaioken/", 2);
     }
 
     @Override

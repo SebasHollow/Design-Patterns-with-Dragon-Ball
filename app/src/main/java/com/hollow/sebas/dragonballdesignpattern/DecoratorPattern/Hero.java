@@ -1,12 +1,14 @@
 package com.hollow.sebas.dragonballdesignpattern.DecoratorPattern;
 
+import com.hollow.sebas.dragonballdesignpattern.Sprite;
+
 import java.util.Map;
 
 /**
  * Created by Sebastianas.Malinaus on 7/11/2015.
  */
 public interface Hero {
-    String spritePath();
+    Sprite.SpriteInfo getBaseSpriteInfo();
     String getName();
     int getPowerLevel();
     int getMaxHealth();
