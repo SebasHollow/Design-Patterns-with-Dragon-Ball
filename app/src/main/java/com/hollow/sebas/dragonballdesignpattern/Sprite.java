@@ -90,7 +90,7 @@ public class Sprite {
     }
 
     public void draw(Canvas canvas) {
-        Rect rect = new Rect(getX() - bitmap.getWidth(), getY() - bitmap.getHeight(), getX(), getY());
+        Rect rect = new Rect(getX() - bitmap.getWidth()/2, getY() - bitmap.getHeight(), getX() + bitmap.getWidth()/2, getY());
         canvas.drawBitmap(bitmap, null, rect, null);
 
 /*        if (currentFrame < 7 || currentFrame >= 10)
